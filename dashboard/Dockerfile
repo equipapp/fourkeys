@@ -26,6 +26,9 @@ ENV BQ_REGION "US"
 # Setting grafana config
 COPY grafana.ini /etc/grafana
 
+# Set the region in the dashboard json file
+RUN envsubst < fourkeys_dashboard_template.json > fourkeys_dashboard.json
+
 # Provisioning dashboards and datasources
 COPY fourkeys_dashboard.json /etc/grafana/dashboards/
 COPY dashboards.yaml /etc/grafana/provisioning/dashboards
